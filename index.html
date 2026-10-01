@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="John Sevell personal portfolio website" />
+  <title>John Sevell | Portfolio</title>
+
+  <style>
+    :root {
+      --rutgers-red: #cc0033;
+      --dark: #111827;
+      --text: #374151;
+      --muted: #6b7280;
+      --light: #f8fafc;
+      --card: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--rutgers-red);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--rutgers-red);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 11px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--dark);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      background: #000;
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--dark);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--rutgers-red);
+      color: var(--rutgers-red);
+    }
+
+    .hero {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      padding: 88px 0 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.5fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .profile-card {
+      text-align: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 34px 26px;
+      box-shadow: 0 20px 45px rgba(17, 24, 39, 0.07);
+    }
+
+    .avatar {
+      width: 132px;
+      height: 132px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, var(--rutgers-red), #8f0024);
+      border: 7px solid #f3f4f6;
+    }
+
+    .profile-card h2 {
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .profile-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #fff1f4;
+      color: var(--rutgers-red);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+      color: var(--dark);
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    section {
+      padding: 82px 0;
+    }
+
+    .section-title {
+      color: var(--dark);
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 34px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .skill {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      text-align: center;
+    }
+
+    .projects {
+      background: var(--light);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .project-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      min-height: 290px;
+      box-shadow: 0 12px 30px rgba(17, 24, 39, 0.05);
+    }
+
+    .project-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #fff1f4;
+      color: var(--rutgers-red);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .project-card h3 {
+      color: var(--dark);
+      font-size: 1.18rem;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .project-link {
+      color: var(--rutgers-red);
+      font-weight: 800;
+      font-size: 0.94rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .about-box {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px;
+      background: #fff;
+    }
+
+    .about-box h3 {
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .about-box p,
+    .about-box li {
+      color: var(--muted);
+    }
+
+    .about-box ul {
+      padding-left: 18px;
+    }
+
+    .contact {
+      text-align: center;
+    }
+
+    .contact-card {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 28px;
+      border-radius: 24px;
+      background: var(--dark);
+      color: #fff;
+    }
+
+    .contact-card h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .contact-card p {
+      color: #d1d5db;
+      margin-bottom: 24px;
+    }
+
+    .contact-card .btn-outline {
+      color: #fff;
+      background: transparent;
+      border-color: #4b5563;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 850px) {
+      .hero-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links a:not(.btn) {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a class="brand" href="#home">
+          <span class="brand-mark">JS</span>
+          <span>John Sevell</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+          <a class="btn btn-primary" href="resume.pdf" target="_blank">Resume</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div class="profile-card">
+          <div class="avatar">JS</div>
+          <h2>John Sevell</h2>
+          <p>Rutgers Business School</p>
+          <p>Accounting & Business Student</p>
+        </div>
+
+        <div>
+          <span class="eyebrow">Open to professional opportunities</span>
+
+          <h1>Business, finance, and operations with a detail-driven approach.</h1>
+
+          <p>
+            Accounting student at Rutgers Business School with experience in financial reporting,
+            investment documentation, data management, and business operations.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View My Work</a>
+
+            <!-- Replace the link below with your real LinkedIn URL -->
+            <a class="btn btn-outline" href="https://www.linkedin.com/" target="_blank">
+              LinkedIn
+            </a>
+
+            <!-- Replace the email below with your preferred professional email -->
+            <a class="btn btn-outline" href="mailto:your-email@example.com">
+              Email Me
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">
+          I am building experience across accounting, finance, operations, and data-focused work
+          while developing the technical and professional skills needed to contribute in a business environment.
+        </p>
+
+        <div class="about-grid">
+          <div class="about-box">
+            <h3>Professional Focus</h3>
+            <p>
+              My interests include accounting, financial analysis, business operations, supply chain,
+              and process improvement. I enjoy organized, detail-oriented work that helps teams make
+              better business decisions.
+            </p>
+          </div>
+
+          <div class="about-box">
+            <h3>What I Bring</h3>
+            <ul>
+              <li>Strong attention to detail</li>
+              <li>Comfort working with financial and operational data</li>
+              <li>Organized documentation and record keeping</li>
+              <li>Team communication and collaboration</li>
+              <li>Interest in improving business processes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <p class="section-subtitle">
+          A selection of technical and professional skills relevant to accounting, finance, and business operations.
+        </p>
+
+        <div class="skills-grid">
+          <div class="skill">Microsoft Excel</div>
+          <div class="skill">Financial Reporting</div>
+          <div class="skill">Journal Entries</div>
+          <div class="skill">Data Management</div>
+          <div class="skill">Financial Analysis</div>
+          <div class="skill">Investment Documentation</div>
+          <div class="skill">Microsoft Office</div>
+          <div class="skill">Process Improvement</div>
+          <div class="skill">Document Management</div>
+          <div class="skill">Quality Checks</div>
+          <div class="skill">Team Collaboration</div>
+          <div class="skill">Business Operations</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects" id="projects">
+      <div class="container">
+        <h2 class="section-title">Projects & Experience</h2>
+        <p class="section-subtitle">
+          Examples of work that demonstrate my experience with financial documentation,
+          operations, organization, and business problem solving.
+        </p>
+
+        <div class="project-grid">
+
+          <article class="project-card">
+            <div class="project-number">01</div>
+            <h3>Financial Reporting & Investment Documentation</h3>
+            <p>
+              Assisted with organizing NAV statements and investment documents, preparing monthly
+              and quarterly workpapers, supporting journal entries, and maintaining capital call
+              and distribution files.
+            </p>
+            <a class="project-link" href="#contact">Learn more →</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-number">02</div>
+            <h3>Evidence Inventory & Document Management</h3>
+            <p>
+              Supported evidence documentation and inventory tracking, including serial-number
+              recording, transfer documentation, organized file management, and quality-control checks.
+            </p>
+            <a class="project-link" href="#contact">Learn more →</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-number">03</div>
+            <h3>Operations & Logistics Analysis</h3>
+            <p>
+              Examined scheduling and logistics challenges in an evidence-collection organization,
+              focusing on employee availability, part-time staffing, coordination, and operational efficiency.
+            </p>
+            <a class="project-link" href="#contact">Learn more →</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <h2>Let's Connect</h2>
+          <p>
+            I am interested in opportunities where I can continue developing my skills in
+            accounting, finance, operations, and business analysis.
+          </p>
+
+          <a class="btn btn-outline" href="mailto:your-email@example.com">
+            Contact Me
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 John Sevell. Built for my personal portfolio.
+    </div>
+  </footer>
+
+</body>
+</html>
